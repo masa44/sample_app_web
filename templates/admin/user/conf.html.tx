@@ -1,0 +1,55 @@
+<h2>ユーザー情報確認画面</h2>
+
+<form action="" method="post" name="form1">
+<table>
+<tr>
+<td>お名前</td>
+<td><!-- TMPL $name1 --> <!-- TMPL $name2 --></td>
+</tr>
+<tr>
+<td>かな</td>
+<td><!-- TMPL $kana1 --> <!-- TMPL $kana2 --></td>
+</tr>
+<tr>
+<td>性別</td>
+<td>
+<!-- TMPL IF $sex_1 -->
+男<br>
+<!-- TMPL END -->
+<!-- TMPL IF $sex_2 -->
+女<br>
+<!-- TMPL END -->
+</td>
+</tr>
+<tr>
+<td>メールアドレス</td>
+<td><!-- TMPL $email --></td>
+</tr>
+<tr>
+<td>グループ</td>
+<td>
+<!-- TMPL IF $group_1 -->
+グループ1<br>
+<!-- TMPL END -->
+<!-- TMPL IF $group_2 -->
+グループ2<br>
+<!-- TMPL END -->
+<!-- TMPL IF $group_3 -->
+グループ3<br>
+<!-- TMPL END -->
+</td>
+</tr>
+<tr>
+<td>備考</td>
+<td>
+<!-- TMPL replace($remarks, "\n", "<br>") | raw -->
+</td>
+</tr>
+</form>
+
+<table>
+<tr>
+<input type="button" value="戻る" onclick="document.form1.action='/admin/user/input';document.form1.submit();">
+<input type="button" value="送信" onclick="document.form1.action='/admin/user/thanks';document.form1.submit();">
+</tr>
+</table>

@@ -1,0 +1,72 @@
+<h2>ユーザー情報入力画面</h2>
+
+<!-- TMPL FILTER fillinform(fill) -->
+<form action="" name="form1" method="post">
+<table>
+<tr>
+<td>お名前(姓)</td>
+<td>
+<input type="text" name="name1" value=""><br>
+<!-- TMPL IF $error.name1.NOT_NULL --><font color="red">お名前（姓）を入力してください。</font><br><!-- TMPL END -->
+</td>
+</tr>
+<tr>
+<td>お名前(名)</td>
+<td>
+<input type="text" name="name2" value=""><br>
+<!-- TMPL IF $error.name2.NOT_NULL --><font color="red">お名前（名）を入力してください。</font><br><!-- TMPL END -->
+</td>
+</tr>
+<tr>
+<td>かな(姓)</td>
+<td>
+<input type="text" name="kana1" value=""><br>
+<!-- TMPL IF $error.kana1.NOT_NULL --><font color="red">かな（姓）を入力してください。</font><br><!-- TMPL END -->
+</td>
+</tr>
+<tr>
+<td>かな(名)</td>
+<td>
+<input type="text" name="kana2" value=""><br>
+<!-- TMPL IF $error.kana2.NOT_NULL --><font color="red">かな（名）を入力してください。</font><br><!-- TMPL END -->
+</td>
+</tr>
+<tr>
+<td>性別</td>
+<td>
+<input type="radio" name="sex" value="1">男　<input type="radio" name="sex" value="2">女<br>
+<!-- TMPL IF $error.sex.NOT_NULL --><font color="red">性別を選択してください。</font><br><!-- TMPL END -->
+</td>
+</tr>
+<tr>
+<td>メールアドレス</td>
+<td>
+<input type="text" name="email" value=""><br>
+<!-- TMPL IF $error.email.NOT_NULL --><font color="red">メールアドレスを入力してください。</font><br><!-- TMPL END -->
+</td>
+</tr>
+<tr>
+<td>グループ</td>
+<td>
+<input type="checkbox" name="group" value="1">グループ1
+<input type="checkbox" name="group" value="2">グループ2
+<input type="checkbox" name="group" value="3">グループ3<br>
+<!-- TMPL IF $error.group.NOT_NULL --><font color="red">グループを選択してください。</font><br><!-- TMPL END -->
+
+</td>
+</tr>
+<tr>
+<td>備考</td>
+<td>
+<textarea name="remarks"></textarea><br>
+<!-- TMPL IF $error.remarks.NOT_NULL --><font color="red">備考を入力してください。</font><br><!-- TMPL END --> 
+</td>
+</tr>
+</form>
+<!-- TMPL END -->
+
+<table>
+<tr>
+<input type="button" value="送信" onclick="document.form1.action='/admin/user/conf';document.form1.submit();">
+</tr>
+</table>
