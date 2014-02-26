@@ -10,7 +10,19 @@ use DDP;
 sub startup {
     my $self = shift;
 
+    # hook
+    $self->hook(
+        after_dispatch => sub {
+            my $c = shift;
+            if ( $c->res->code =~ /500/ ) {
+                $c->render( text => '500 error hooked!!' );
+            }
+        }
+    );
+
+    # plugin setup
     $self->plugin(
+        # Xslate plugin
         'xslate_renderer' => {
             template_options => {
                 syntax    => 'TTerse',
@@ -22,6 +34,7 @@ sub startup {
         }
     );
 
+    # connection pool
     $self->attr(
         db => sub {
             SampleApp::DB->init(
@@ -44,16 +57,18 @@ sub startup {
             return $env->{'psgix.session'};
         },
 
+#        # model呼び出しhelper
+#        model => sub {
+#            my ( $self, $name ) = @_;
+#            SampleApp::Model->new->load($name);
+#        },
+    );
+
+    $self->helper(
         # model呼び出しhelper
         model => sub {
             my ( $self, $name ) = @_;
             SampleApp::Model->new->load($name);
-        },
-
-        # DB model呼び出しhelper
-        db => sub {
-            my ( $self, $name ) = @_;
-            SampleApp::DB->new->load($name);
         }
     );
 

@@ -1,0 +1,51 @@
+package SampleApp::Model::AdminUser {
+    use Mouse;
+    use FormValidator::Lite;
+    use DDP;
+
+    has 'rule' => (
+        is      => 'rw',
+        isa     => 'HashRef',
+        default => sub {
+            {
+                'name1'   => ['NOT_NULL'],
+                'name2'   => ['NOT_NULL'],
+                'kana1'   => ['NOT_NULL'],
+                'kana2'   => ['NOT_NULL'],
+                'sex'     => ['NOT_NULL'],
+                'email'   => ['NOT_NULL'],
+                'remarks' => ['NOT_NULL'],
+                'group'   => ['NOT_NULL'],
+            };
+        }
+    );
+
+    sub validate {
+        my ( $self, $req ) = @_;
+
+        # error check
+        my $validator = FormValidator::Lite->new( $req );
+        $validator->check( %{ $self->rule() } );
+
+        return $validator;
+    }
+
+    sub input_folder {
+        my ( $self, $indata) = @_;
+        my $folder = {};
+
+        $folder->{name1}   = $indata->{name1};
+        $folder->{name1}   = $indata->{name1}; 
+        $folder->{name2}   = $indata->{name2}; 
+        $folder->{kana1}   = $indata->{kana1}; 
+        $folder->{kana2}   = $indata->{kana2}; 
+        $folder->{email}   = $indata->{email}; 
+        $folder->{sex}     = $indata->{sex}; 
+        $folder->{remarks} = $indata->{remarks}; 
+        $folder->{group}   = $indata->{group};
+
+        return $folder;
+    }
+}
+
+1;

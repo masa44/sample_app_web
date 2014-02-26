@@ -5,16 +5,6 @@ use Mouse;
 use Plack::Util;
 use SampleApp::DB;
 
-has 'instances' => (
-    traits  => ['Hash'],
-    is      => 'rw',
-    isa     => 'HashRef',
-    default => sub { +{} },
-    handles => {
-        set_instance => 'set'
-    }
-);
-
 sub init {
     my ( $class, $config ) = @_;
 
@@ -30,16 +20,6 @@ sub init {
     );
 
     return $teng;
-}
-
-sub load {
-    my ( $self, $name ) = @_;
-    my $instance = $self->instances->{$name};
-    return $instance if $instance;
-    my $class = Plack::Util::load_class( $name, 'SampleApp::DB' );
-    $instance = $class->new;
-    $self->set_instance( $name, $instance );
-    return $instance;
 }
 
 1;
